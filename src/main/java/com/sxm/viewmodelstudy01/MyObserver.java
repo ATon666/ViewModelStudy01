@@ -7,11 +7,11 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 
-public class Myobserver implements LifecycleObserver {
+public class MyObserver implements LifecycleObserver {
     private final String TAG = "Myobserver";
     private Lifecycle lifecycle;
 
-    Myobserver(Lifecycle lifecycle) {
+    MyObserver(Lifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 
