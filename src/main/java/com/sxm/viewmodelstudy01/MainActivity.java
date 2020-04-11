@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner {
         Lifecycle lifecycle = getLifecycle();
 
         viewModel = new ViewModelProvider(this).get(CounterViewModel.class);
-        Myobserver myObserver = new Myobserver(lifecycle);
+        MyObserver myObserver = new MyObserver(lifecycle);
         lifecycle.addObserver(myObserver);
         refreshView();
     }
