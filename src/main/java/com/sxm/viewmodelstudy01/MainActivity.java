@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import butterknife.BindView;
@@ -33,17 +34,27 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         Lifecycle lifecycle = getLifecycle();
+        MyObserver myObserver = new MyObserver(lifecycle);
 
         viewModel = new ViewModelProvider(this).get(CounterViewModel.class);
-        MyObserver myObserver = new MyObserver(lifecycle);
+
+        viewModel.counter.observe(this,new Observer<Integer>(){
+            @Override
+            public void onChanged(Integer integer) {
+                Log.d(TAG, "onChanged: ");
+                textView.setText(String.valueOf(viewModel.counter.getValue()));
+
+            }
+
+        });
         lifecycle.addObserver(myObserver);
         refreshView();
     }
 
     @OnClick(R.id.button)
     public void onViewClicked() {
-        viewModel.counter++;
-        refreshView();
+        viewModel.plusOne();
+
     }
 
     private void refreshView() {
